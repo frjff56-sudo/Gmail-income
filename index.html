@@ -12,6 +12,108 @@
             margin: 0;
             padding: 0;
             text-align: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* লাইভ ইনকাম ব্যাকগ্রাউন্ড */
+        #incomeBackground {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1a2980 0%, #26d0ce 100%);
+        }
+
+        .background-element {
+            position: absolute;
+            opacity: 0.7;
+            animation: float 20s infinite linear;
+        }
+
+        .coin {
+            background: radial-gradient(circle at 30% 30%, #FFD700, #FFA500);
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+        }
+
+        .dollar {
+            color: #2ECC71;
+            font-weight: bold;
+            font-size: 24px;
+            text-shadow: 0 0 10px rgba(46, 204, 113, 0.8);
+        }
+
+        .money-bag {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: relative;
+        }
+
+        .money-bag:after {
+            content: "💰";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+        }
+
+        .growth-chart {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            padding: 5px;
+        }
+
+        .chart-bar {
+            width: 8px;
+            background: linear-gradient(to top, #3498db, #2ecc71);
+            margin: 0 3px;
+            border-radius: 3px 3px 0 0;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.7;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.9;
+            }
+        }
+
+        @keyframes wave {
+            0% {
+                transform: translateX(0) translateY(0);
+            }
+            25% {
+                transform: translateX(10px) translateY(-5px);
+            }
+            50% {
+                transform: translateX(0) translateY(-10px);
+            }
+            75% {
+                transform: translateX(-10px) translateY(-5px);
+            }
+            100% {
+                transform: translateX(0) translateY(0);
+            }
         }
 
         /* লাইভ স্ক্রলিং */
@@ -27,6 +129,7 @@
             left: 0;
             z-index: 999;
             overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .marquee {
@@ -39,7 +142,6 @@
             0% {
                 transform: translateX(100%);
             }
-
             100% {
                 transform: translateX(-100%);
             }
@@ -49,10 +151,13 @@
             width: 95%;
             max-width: 650px;
             margin: 90px auto 30px auto;
-            background: #ffffff;
+            background: rgba(255, 255, 255, 0.95);
             padding: 30px 20px;
             border-radius: 15px;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(5px);
+            position: relative;
+            z-index: 1;
         }
 
         h1 {
@@ -60,6 +165,7 @@
             margin-bottom: 5px;
             color: #d93025;
             font-weight: 700;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
         }
 
         h3 {
@@ -74,6 +180,7 @@
         .logo {
             width: 80px;
             margin-bottom: 15px;
+            animation: pulse 2s infinite;
         }
 
         .section-title {
@@ -85,6 +192,9 @@
             padding-left: 10px;
             margin-bottom: 15px;
             text-align: left;
+            background: rgba(66, 133, 244, 0.1);
+            padding: 10px;
+            border-radius: 0 8px 8px 0;
         }
 
         .btn {
@@ -101,6 +211,25 @@
             transition: all 0.3s ease;
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
             border: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn:hover {
@@ -135,6 +264,7 @@
             height: 24px;
             vertical-align: middle;
             margin-right: 12px;
+            filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
         }
 
         .info-box {
@@ -146,6 +276,7 @@
             font-size: 17px;
             text-align: left;
             line-height: 1.6;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .details-content {
@@ -153,6 +284,12 @@
             transition: max-height 0.5s ease-out;
             overflow: hidden;
             margin-top: 20px;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .details-content h4 {
@@ -167,14 +304,48 @@
             font-size: 14px;
             color: #555;
             margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .floating-text {
+            position: fixed;
+            font-size: 14px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            z-index: 0;
+            animation: wave 8s infinite ease-in-out;
+            opacity: 0.8;
+        }
+
+        .income-counter {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #2ECC71;
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 16px;
+            z-index: 2;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            animation: pulse 2s infinite;
         }
     </style>
-
 </head>
 
 <body>
+    <!-- লাইভ ইনকাম ব্যাকগ্রাউন্ড -->
+    <div id="incomeBackground"></div>
+    
+    <!-- লাইভ ইনকাম কাউন্টার -->
+    <div class="income-counter">
+        💸প্রতিদিন ইনকাম করুন👉: <span id="incomeValue">৳ 0</span>
+    </div>
+
     <div class="marquee-container">
-        <div class="marquee">💸Gmail বিক্রি করে ইনকাম করুন — কাজ শিখুন, কাজ করুন, ইনকাম নিন! 💰</div>
+        <div class="marquee">💸 Gmail বিক্রি করে ইনকাম করুন — কাজ শিখুন, কাজ করুন, ইনকাম নিন! 💰</div>
     </div>
 
     <div class="container">
@@ -235,6 +406,87 @@
     </div>
 
     <script>
+        // লাইভ ব্যাকগ্রাউন্ড উপাদান তৈরি
+        function createBackgroundElements() {
+            const background = document.getElementById('incomeBackground');
+            const elements = [
+                { type: 'coin', size: 20, delay: 0 },
+                { type: 'dollar', size: 30, delay: 1 },
+                { type: 'money-bag', size: 40, delay: 2 },
+                { type: 'coin', size: 25, delay: 3 },
+                { type: 'dollar', size: 35, delay: 4 },
+                { type: 'money-bag', size: 45, delay: 5 },
+                { type: 'coin', size: 22, delay: 6 },
+                { type: 'dollar', size: 32, delay: 7 },
+                { type: 'coin', size: 28, delay: 8 },
+                { type: 'money-bag', size: 38, delay: 9 }
+            ];
+
+            elements.forEach((element, index) => {
+                const el = document.createElement('div');
+                el.className = `background-element ${element.type}`;
+                
+                // এলিমেন্টের জন্য স্টাইল
+                el.style.width = `${element.size}px`;
+                el.style.height = `${element.size}px`;
+                el.style.left = `${Math.random() * 100}%`;
+                el.style.animationDelay = `${element.delay}s`;
+                
+                // টাইপ অনুযায়ী কন্টেন্ট
+                if (element.type === 'dollar') {
+                    el.innerHTML = '$';
+                    el.style.fontSize = `${element.size}px`;
+                    el.style.display = 'flex';
+                    el.style.alignItems = 'center';
+                    el.style.justifyContent = 'center';
+                }
+                
+                // চার্ট এলিমেন্টের জন্য
+                if (element.type === 'growth-chart') {
+                    el.innerHTML = `
+                        <div class="chart-bar" style="height: ${20 + Math.random() * 30}%"></div>
+                        <div class="chart-bar" style="height: ${20 + Math.random() * 30}%"></div>
+                        <div class="chart-bar" style="height: ${20 + Math.random() * 30}%"></div>
+                        <div class="chart-bar" style="height: ${20 + Math.random() * 30}%"></div>
+                        <div class="chart-bar" style="height: ${20 + Math.random() * 30}%"></div>
+                    `;
+                }
+                
+                background.appendChild(el);
+            });
+
+            // ফ্লোটিং টেক্সট এলিমেন্ট তৈরি
+            for (let i = 0; i < 8; i++) {
+                const textEl = document.createElement('div');
+                textEl.className = 'floating-text';
+                textEl.innerHTML = ['💰', '💸', '💵', '📈', '💼', '💳', '🤑', '💲'][i % 8];
+                textEl.style.left = `${10 + i * 10}%`;
+                textEl.style.top = `${20 + Math.random() * 60}%`;
+                textEl.style.fontSize = `${20 + Math.random() * 20}px`;
+                textEl.style.animationDelay = `${i * 0.5}s`;
+                background.appendChild(textEl);
+            }
+        }
+
+        // ইনকাম কাউন্টার আপডেট
+        function updateIncomeCounter() {
+            const incomeValue = document.getElementById('incomeValue');
+            let currentIncome = 0;
+            const targetIncome = 1250 + Math.random() * 750; // র‍্যান্ডম টার্গেট ইনকাম
+            
+            const interval = setInterval(() => {
+                currentIncome += 25;
+                if (currentIncome >= targetIncome) {
+                    currentIncome = targetIncome;
+                    clearInterval(interval);
+                    // নতুন টার্গেট সেট করার জন্য কিছু সময় পর আবার শুরু
+                    setTimeout(updateIncomeCounter, 3000);
+                }
+                incomeValue.textContent = `৳ ${currentIncome.toFixed(0)}`;
+            }, 100);
+        }
+
+        // বিস্তারিত কন্টেন্ট টগল
         document.getElementById('toggleDetailsBtn').addEventListener('click', function() {
             var content = document.getElementById('detailsContent');
             var button = document.getElementById('toggleDetailsBtn');
@@ -247,8 +499,13 @@
                 button.innerHTML = 'বিস্তারিত বন্ধ করুন (ক্লিক করুন)';
             }
         });
+
+        // পেজ লোড হওয়ার পরে ব্যাকগ্রাউন্ড তৈরি
+        document.addEventListener('DOMContentLoaded', function() {
+            createBackgroundElements();
+            updateIncomeCounter();
+        });
     </script>
 
 </body>
-
 </html>
